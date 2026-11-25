@@ -1,0 +1,81 @@
+#CampSoulTotals
+{
+    width: 100%;
+    height: 100%;
+    ignore-parent-flow: true;
+    visibility: collapse;
+    z-index: 10;
+}
+
+.HudMinimap.dl_midtown.gScoreboardOpen #CampSoulTotals.HasCampSouls
+{
+    visibility: visible;
+}
+
+.CampSoulSite
+{
+    width: 100%;
+    height: 100%;
+    ignore-parent-flow: true;
+    visibility: collapse;
+}
+
+.CampSoulSite.IsObserved
+{
+    visibility: visible;
+}
+
+.CampSoulLink
+{
+    height: 1px;
+    background-color: #d5dbdd88;
+}
+
+.CampSoulLabel
+{
+    width: 24px;
+    height: 14px;
+    margin-left: -12px;
+    margin-top: -7px;
+    border-radius: 3px;
+    background-color: #10161cf5;
+    text-align: center;
+    font-family: numericSans;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 14px;
+    z-index: 2;
+}
+
+.CampSoulLabel.WideValue
+{
+    width: 28px;
+    margin-left: -14px;
+}
+
+.CampSoulLabel.Small { color: #a6efbc; }
+.CampSoulLabel.Medium { color: #ffd989; }
+.CampSoulLabel.Large { color: #ffada4; }
+.CampSoulLabel.Sinner { color: #c5b5ff; }
+
+#CampSoulLegend
+{
+    horizontal-align: center;
+    margin-top: 5px;
+    padding: 1px 5px;
+    background-color: #10161cf5;
+    color: #d5dbdd;
+    font-size: 10px;
+}
+
+.invert_map .CampSoulLabel
+{
+    transform: rotateZ(180deg);
+}
+
+.invert_map #CampSoulLegend
+{
+    vertical-align: bottom;
+    margin-bottom: 5px;
+    transform: rotateZ(180deg);
+}
