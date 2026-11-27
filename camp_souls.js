@@ -5,6 +5,9 @@
     const hoverOnly = /* HOVER_ONLY */ false;
     const neutralClasses = ["neutral_weak", "neutral_medium", "neutral_large", "neutral_vault"];
     const baseRewards = [43, 71, 189, 310];
+    const troopersPerWave = 4;
+    const trooperBaseReward = 100;
+    const trooperRewardPerMinute = 2;
     const crateSpawnMinute = 3;
     const crateBaseReward = 18;
     const crateRewardPerMinute = 2;
@@ -28,6 +31,26 @@
             const reward = tier === 3 ? Math.round(scaled) : Math.floor(scaled);
             return total + count * reward;
         }, 0);
+    }
+
+    function updateReadouts(minute) {
+        const readouts = map.FindChildTraverse("MapSoulReadouts");
+        if (!readouts) return;
+        const hasTime = minute !== null;
+        const hasCrateReward = hasTime && minute >= crateSpawnMinute;
+        readouts.SetHasClass("HasMatchTime", hasTime);
+        readouts.SetHasClass("HasCrateReward", hasCrateReward);
+        if (!hasTime) return;
+
+        const waveLabel = readouts.FindChildTraverse("WaveSoulValue");
+        const waveValue = String(troopersPerWave * (trooperBaseReward + trooperRewardPerMinute * minute));
+        if (waveLabel && waveLabel.text !== waveValue) waveLabel.text = waveValue;
+
+        if (hasCrateReward) {
+            const crateLabel = readouts.FindChildTraverse("CrateSoulValue");
+            const crateValue = String(crateBaseReward + crateRewardPerMinute * minute);
+            if (crateLabel && crateLabel.text !== crateValue) crateLabel.text = crateValue;
+        }
     }
 
     function markerPosition(marker) {
@@ -75,15 +98,7 @@
         }
         const mapOpen = map.BHasClass("dl_midtown") && map.BHasClass("gScoreboardOpen");
         const minute = mapOpen ? matchMinute() : null;
-        const crateLabel = map.FindChildTraverse("CrateSoulValue");
-        if (crateLabel) {
-            const available = minute !== null && minute >= crateSpawnMinute;
-            if (available) {
-                const value = `Crate drop · ${crateBaseReward + crateRewardPerMinute * minute} Souls`;
-                if (crateLabel.text !== value) crateLabel.text = value;
-            }
-            crateLabel.SetHasClass("IsAvailable", available);
-        }
+        updateReadouts(minute);
         if (layer && mapOpen) {
             const active = minute === null ? new Set() : activeSites();
             for (const site of sites) {

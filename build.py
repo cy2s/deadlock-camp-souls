@@ -92,7 +92,23 @@ def patch_minimap(stock_layout: str, camps: list[dict], *, hover_only: bool = Fa
         ET.SubElement(site, "Label", {
             "class": f"CampSoulLabel {color_class}", "style": position(lx, ly),
         })
-    ET.SubElement(minimap, "Label", {"id": "CrateSoulValue", "hittest": "false"})
+    readouts = ET.SubElement(minimap, "Panel", {
+        "id": "MapSoulReadouts", "hittest": "false", "hittestchildren": "false",
+    })
+    wave = ET.SubElement(readouts, "Panel", {"class": "MapSoulReadout"})
+    wave_icon = ET.SubElement(wave, "Panel", {"class": "MapSoulIcon"})
+    ET.SubElement(wave_icon, "Panel", {"class": "TrooperHelmet TrooperHelmetLeft"})
+    ET.SubElement(wave_icon, "Panel", {"class": "TrooperHelmet TrooperHelmetRight"})
+    helmet = ET.SubElement(wave_icon, "Panel", {"class": "TrooperHelmet TrooperHelmetCenter"})
+    ET.SubElement(helmet, "Panel", {"class": "TrooperVisor"})
+    ET.SubElement(wave, "Label", {"id": "WaveSoulValue", "class": "MapSoulReadoutValue"})
+
+    crate = ET.SubElement(readouts, "Panel", {"id": "CrateSoulReadout", "class": "MapSoulReadout"})
+    crate_icon = ET.SubElement(crate, "Panel", {"class": "MapSoulIcon"})
+    crate_frame = ET.SubElement(crate_icon, "Panel", {"class": "CrateFrame"})
+    ET.SubElement(crate_frame, "Panel", {"class": "CrateBrace"})
+    ET.SubElement(crate_frame, "Panel", {"class": "CrateBrace CrateBraceReverse"})
+    ET.SubElement(crate, "Label", {"id": "CrateSoulValue", "class": "MapSoulReadoutValue"})
     ET.indent(root, space="\t")
     return ET.tostring(root, encoding="unicode") + "\n"
 
