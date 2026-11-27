@@ -92,6 +92,7 @@ def patch_minimap(stock_layout: str, camps: list[dict], *, hover_only: bool = Fa
         ET.SubElement(site, "Label", {
             "class": f"CampSoulLabel {color_class}", "style": position(lx, ly),
         })
+    ET.SubElement(minimap, "Label", {"id": "CrateSoulValue", "hittest": "false"})
     ET.indent(root, space="\t")
     return ET.tostring(root, encoding="unicode") + "\n"
 

@@ -9,6 +9,8 @@
 
 只有原生小地图面板提供可见、激活的营地标记，并能唯一对上点位，才显示数字。清空到重刷之间跟随游戏原生标记隐藏。读不到对局时钟或营地状态时会隐藏相应数字。
 
+从 3:00 起，两个版本的 Tab 地图左上侧都会显示 `Crate drop`。这是单个普通箱子出魂时的金额，按 `18 + 2 × 对局整分钟` 计算，例如 3:00 为 `24 Souls`，20:00 为 `58 Souls`。普通出魂箱的配置掉落概率为 60%。 [普通箱配置](https://github.com/SteamTracking/GameTracking-Deadlock/blob/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd/game/citadel/pak01_dir/scripts/misc.vdata#L134-L154) · [掉落金额配置](https://github.com/SteamTracking/GameTracking-Deadlock/blob/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd/game/citadel/pak01_dir/scripts/misc.vdata#L1289-L1290)
+
 `camps.json` 的 51 个点位按地图 ID 关联 Deadlock API 的客户端 `6871` 坐标和 Deadlock Vault 的营地阵容。`counts` 依次为小怪、中怪、大怪、老虎机的数量。11 月 26 日补丁将单只野怪的基础值改为 `43 / 71 / 189`。单台老虎机的满额估算用 `155×2 = 310`，合计敲击和打碎两部分。[官方补丁说明](https://store.steampowered.com/news/app/1422450/view/680768104678032838) · [地图数据 API](https://api.deadlock-api.com/v1/assets/map?client_version=6871) · [营地阵容](https://deadlockvault.net/map/camps) · [NPC 数据](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd/game/citadel/pak01_dir/scripts/npc_units.vdata)
 
 ## 安装与卸载
@@ -33,4 +35,4 @@ python build.py --hover-only
 
 `dist/` 的 VPK 包含小地图布局、样式和 Panorama 脚本。若安装了同样覆盖 `hud_minimap.vxml_c` 的模组，两份布局需要合并才能同时生效。游戏更新后需核对营地组成、坐标和布局。[原生 HUD 小地图布局](https://github.com/SteamTracking/GameTracking-Deadlock/blob/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd/game/citadel/pak01_dir/panorama/layout/hud_minimap.xml) · [原生小地图样式](https://github.com/SteamTracking/GameTracking-Deadlock/blob/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd/game/citadel/pak01_dir/panorama/styles/hud_minimap.css)
 
-已用 Source 2 Viewer 21.1 校验两个 VPK 并读回三项资源。模拟覆盖时间变化、清空隐藏、重刷恢复、Tab 开关和悬停切换。按 360 px 布局同时摆放 51 个标签，即使全部按四位数宽度计算也无重叠。本机无 Deadlock 客户端，尚未确认 `6871` 的实际对局是否对 Panorama 暴露逐点位的活动标记，以及营地图标是否提供悬停状态。缺少所需标记或状态时，收益会保持隐藏。Tab 加载、实机缩放、阵营翻转和坐标对齐也待实机验证。
+已用 Source 2 Viewer 21.1 校验两个 VPK 并读回三项资源。模拟覆盖时间变化、清空隐藏、重刷恢复、Tab 开关、悬停切换和普通箱读数的首刷时间。按 360 px 布局同时摆放 51 个标签，即使全部按四位数宽度计算也无重叠。本机无 Deadlock 客户端，尚未确认 `6871` 的实际对局是否对 Panorama 暴露逐点位的活动标记，以及营地图标是否提供悬停状态。缺少所需标记或状态时，收益会保持隐藏。Tab 加载、实机缩放、阵营翻转和坐标对齐也待实机验证。

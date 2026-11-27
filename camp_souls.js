@@ -5,6 +5,9 @@
     const hoverOnly = /* HOVER_ONLY */ false;
     const neutralClasses = ["neutral_weak", "neutral_medium", "neutral_large", "neutral_vault"];
     const baseRewards = [43, 71, 189, 310];
+    const crateSpawnMinute = 3;
+    const crateBaseReward = 18;
+    const crateRewardPerMinute = 2;
     const map = $.GetContextPanel();
     let overlay;
     let sites = [];
@@ -70,9 +73,18 @@
                 return label ? { camp, panel, label, type } : null;
             }).filter(Boolean);
         }
-        const mapOpen = layer && map.BHasClass("dl_midtown") && map.BHasClass("gScoreboardOpen");
-        if (mapOpen) {
-            const minute = matchMinute();
+        const mapOpen = map.BHasClass("dl_midtown") && map.BHasClass("gScoreboardOpen");
+        const minute = mapOpen ? matchMinute() : null;
+        const crateLabel = map.FindChildTraverse("CrateSoulValue");
+        if (crateLabel) {
+            const available = minute !== null && minute >= crateSpawnMinute;
+            if (available) {
+                const value = `Crate drop · ${crateBaseReward + crateRewardPerMinute * minute} Souls`;
+                if (crateLabel.text !== value) crateLabel.text = value;
+            }
+            crateLabel.SetHasClass("IsAvailable", available);
+        }
+        if (layer && mapOpen) {
             const active = minute === null ? new Set() : activeSites();
             for (const site of sites) {
                 const observed = active.has(site);
