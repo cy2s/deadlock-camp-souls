@@ -10,8 +10,8 @@ Deadlock 小地图 Mod。按住 `Tab`，查看 Midtown 野怪、老虎机和混�
 
 | 版本 | 按住 Tab 时 | 下载 |
 | --- | --- | --- |
-| Tab 版 | 显示游戏已标为刷新的营地收益 | [Tab ZIP](https://github.com/cy2s/deadlock-camp-souls/releases/download/v0.1.4-preview/midtown-camp-souls-tab-preview.zip) |
-| 悬停试验版 | 鼠标移到原生营地图标时，显示该点位收益 | [Hover ZIP](https://github.com/cy2s/deadlock-camp-souls/releases/download/v0.1.4-preview/midtown-camp-souls-hover-preview.zip) |
+| Tab 版 | 显示游戏已标为刷新的营地收益 | [Tab ZIP](https://github.com/cy2s/deadlock-camp-souls/releases/download/v0.1.5-preview/midtown-camp-souls-tab-preview.zip) |
+| 悬停试验版 | 鼠标移到原生营地图标时，显示该点位收益 | [Hover ZIP](https://github.com/cy2s/deadlock-camp-souls/releases/download/v0.1.5-preview/midtown-camp-souls-hover-preview.zip) |
 
 1. 退出 Deadlock，任选一个 ZIP。升级时先停用旧版。
 2. 在 Deadlock Mod Manager 打开 `Mods Library → Add Local Mod`，导入 ZIP 并启用。
@@ -33,8 +33,8 @@ Deadlock 小地图 Mod。按住 `Tab`，查看 Midtown 野怪、老虎机和混�
 | --- | --- |
 | 野怪 | 小、中、大怪单只基础值为 `43 / 71 / 189`。按对局整分钟每分钟增加基础值的 `1.08%`，单只向下取整后累加。 |
 | 老虎机 | 单台把敲击与打碎的两部分合计，基础满额为 `155 × 2 = 310`。按相同的 `1.08%` 增长，单台总额取近似整数。 |
-| 兵线（烛头小兵图标） | 一波 4 只普通小兵全收为 `4 × (100 + 2 × 对局整分钟)`。20:00 为 `560`，是单人全收的参考值。 |
-| 普通箱（木箱图标） | 单个箱子出魂时为 `18 + 2 × 对局整分钟`，3:00 为 `24`，20:00 为 `58`。此类箱子的配置掉落概率为 `60%`。 |
+| 兵线（蓝色小兵图标） | 一波 4 只普通小兵全收为 `4 × (100 + 2 × 对局整分钟)`。20:00 为 `560`，是单人全收的参考值。 |
+| 普通箱（黄色木箱图标） | 单个箱子出魂时为 `18 + 2 × 对局整分钟`，3:00 为 `24`，20:00 为 `58`。此类箱子的配置掉落概率为 `60%`。 |
 
 营地数字以完整阵容估算。清空到重刷之间，数字跟随游戏的原生营地标记隐藏。实际到账会随剩余数量、分配和逐次取整变化。绿色、黄色、浅红色对应小、中、大营地，紫色代表含老虎机的点位。兵线和普通箱是地图侧边的参考值。 [NPC 数据](https://github.com/SteamTracking/GameTracking-Deadlock/blob/6d9ccf2531f8b097e7b97908765eda6f1b501de1/game/citadel/pak01_dir/scripts/npc_units.vdata) · [老虎机结算规则](https://deadlock.wiki/Sinner%27s_Sacrifice#Souls) · [普通箱掉落](https://github.com/SteamTracking/GameTracking-Deadlock/blob/6d9ccf2531f8b097e7b97908765eda6f1b501de1/game/citadel/pak01_dir/scripts/misc.vdata#L134-L154) · [普通箱金额](https://github.com/SteamTracking/GameTracking-Deadlock/blob/6d9ccf2531f8b097e7b97908765eda6f1b501de1/game/citadel/pak01_dir/scripts/misc.vdata#L1289-L1290) · [小兵收益和波次配置](https://github.com/SteamTracking/GameTracking-Deadlock/blob/6d9ccf2531f8b097e7b97908765eda6f1b501de1/DumpSource2/convars.txt#L5263-L5348)
 

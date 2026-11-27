@@ -10,8 +10,8 @@ Both preview packages have passed offline checks. In-game rendering and hover be
 
 | Variant | While holding Tab | Download |
 | --- | --- | --- |
-| Tab | Shows estimates for camps the game marks as active | [Tab ZIP](https://github.com/cy2s/deadlock-camp-souls/releases/download/v0.1.4-preview/midtown-camp-souls-tab-preview.zip) |
-| Experimental hover | Shows the estimate when the pointer is over a native camp icon | [Hover ZIP](https://github.com/cy2s/deadlock-camp-souls/releases/download/v0.1.4-preview/midtown-camp-souls-hover-preview.zip) |
+| Tab | Shows estimates for camps the game marks as active | [Tab ZIP](https://github.com/cy2s/deadlock-camp-souls/releases/download/v0.1.5-preview/midtown-camp-souls-tab-preview.zip) |
+| Experimental hover | Shows the estimate when the pointer is over a native camp icon | [Hover ZIP](https://github.com/cy2s/deadlock-camp-souls/releases/download/v0.1.5-preview/midtown-camp-souls-hover-preview.zip) |
 
 1. Close Deadlock and choose one ZIP. Disable any previous version before upgrading.
 2. Open `Mods Library → Add Local Mod` in Deadlock Mod Manager. Import the ZIP and enable it.
@@ -33,8 +33,8 @@ The interactive chart has 15 selectable camps and shows estimates by match minut
 | --- | --- |
 | Haunts | Small, medium, and large Haunts start at `43 / 71 / 189` Souls each. Every full match minute adds `1.08%` of the base. Each Haunt’s reward is rounded down before summing. |
 | Sinner’s Sacrifice | Each machine starts at `155 × 2 = 310` Souls for all hits and the final break combined. The same `1.08%` growth applies, with each machine’s total rounded to the nearest integer. |
-| Trooper wave (candle-headed trooper icon) | One standard wave of four troopers is worth `4 × (100 + 2 × full match minutes)` before Soul sharing or missed pickups. At 20:00, the estimate is `560`. |
-| Ordinary crate (wooden crate icon) | A single crate that drops Souls pays `18 + 2 × full match minutes`. This is `24` at 3:00 and `58` at 20:00. The configured Soul drop chance is `60%`. |
+| Trooper wave (blue trooper icon) | One standard wave of four troopers is worth `4 × (100 + 2 × full match minutes)` before Soul sharing or missed pickups. At 20:00, the estimate is `560`. |
+| Ordinary crate (yellow crate icon) | A single crate that drops Souls pays `18 + 2 × full match minutes`. This is `24` at 3:00 and `58` at 20:00. The configured Soul drop chance is `60%`. |
 
 Camp labels estimate the full roster. They follow the game’s active minimap markers and hide after a camp is cleared until its marker returns. Actual payouts vary with remaining units, Soul sharing, and rounding. Small, medium, and large camps use green, yellow, and light red. Purple marks camps that include Sinner’s Sacrifice. [NPC data](https://github.com/SteamTracking/GameTracking-Deadlock/blob/6d9ccf2531f8b097e7b97908765eda6f1b501de1/game/citadel/pak01_dir/scripts/npc_units.vdata) · [Sinner’s Sacrifice payouts](https://deadlock.wiki/Sinner%27s_Sacrifice#Souls) · [Crate drop chance](https://github.com/SteamTracking/GameTracking-Deadlock/blob/6d9ccf2531f8b097e7b97908765eda6f1b501de1/game/citadel/pak01_dir/scripts/misc.vdata#L134-L154) · [Crate reward](https://github.com/SteamTracking/GameTracking-Deadlock/blob/6d9ccf2531f8b097e7b97908765eda6f1b501de1/game/citadel/pak01_dir/scripts/misc.vdata#L1289-L1290) · [Trooper rewards and wave size](https://github.com/SteamTracking/GameTracking-Deadlock/blob/6d9ccf2531f8b097e7b97908765eda6f1b501de1/DumpSource2/convars.txt#L5263-L5348)
 
