@@ -2,14 +2,14 @@
 
 按住 `Tab` 打开的 Midtown 地图上，已刷新的点位显示**按当前对局时间估算的满营 Souls**。数字用游戏的 12 px 数字字体，三位数底牌宽 24 px，达到四位时加宽至 28 px。偏移较远的标签用细线指向营地。绿色、黄色、浅红色分别用于小、中、大营地，紫色用于含老虎机的营地。
 
-- **野怪营地**按配置的怪物只数累加。例如车库地面层 `2×45 + 75` 的基础值为 `165`，在 5:00 按 `2×47 + 79` 显示 `173`。
+- **野怪营地**按配置的怪物只数累加。例如车库地面层 `2×43 + 71` 的基础值为 `157`，在 5:00 按 `2×45 + 74` 显示 `164`。
 - **老虎机及混合营地**按满营配置累加。例如单台在 8:00 约值 `337`，在 20:00 约值 `377`。
 
 收益取顶部原生对局计时器的整分钟数，每分钟按基础值增加 `1.08%`。野怪按单只截断后累加，老虎机按单台总额取近似整数。数字按满营估算，实际到账会受剩余数量、分配和逐次取整影响。[野怪收益计算](https://www.dltimes.com/articles/city-never-sleeps-spawn-timers) · [老虎机结算规则](https://deadlock.wiki/Sinner%27s_Sacrifice#Souls)
 
 只有原生小地图面板提供可见、激活的营地标记，并能唯一对上点位，才显示数字。清空到重刷之间跟随游戏原生标记隐藏。读不到对局时钟或营地状态时会隐藏相应数字。
 
-`camps.json` 的 51 个点位按地图 ID 关联 Deadlock API 的客户端 `6868` 坐标和 Deadlock Vault 的营地阵容。`counts` 依次为小怪、中怪、大怪、老虎机的数量。单只野怪使用游戏配置里的 `45 / 75 / 199`，单台老虎机用 `155×2 = 310`，合计敲击和打碎两部分。[地图数据 API](https://api.deadlock-api.com/v1/assets/map?client_version=6868) · [营地阵容](https://deadlockvault.net/map/camps) · [NPC 数据](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/e835dad025d2d4ec7ef126aa13863d1df25d726d/game/citadel/pak01_dir/scripts/npc_units.vdata)
+`camps.json` 的 51 个点位按地图 ID 关联 Deadlock API 的客户端 `6871` 坐标和 Deadlock Vault 的营地阵容。`counts` 依次为小怪、中怪、大怪、老虎机的数量。11 月 26 日补丁将单只野怪的基础值改为 `43 / 71 / 189`。单台老虎机的满额估算用 `155×2 = 310`，合计敲击和打碎两部分。[官方补丁说明](https://store.steampowered.com/news/app/1422450/view/680768104678032838) · [地图数据 API](https://api.deadlock-api.com/v1/assets/map?client_version=6871) · [营地阵容](https://deadlockvault.net/map/camps) · [NPC 数据](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd/game/citadel/pak01_dir/scripts/npc_units.vdata)
 
 ## 安装与卸载
 
@@ -24,13 +24,13 @@
 
 ## 构建与验证
 
-使用 Python 3.10 或更高版本。构建时会取 `6868` 对应的原生小地图布局，也可以用 `--minimap-layout` 指定同一版本的解包 XML。
+使用 Python 3.10 或更高版本。构建时会取 `6871` 对应的原生小地图布局，也可以用 `--minimap-layout` 指定同一版本的解包 XML。
 
 ```sh
 python build.py
 python build.py --hover-only
 ```
 
-`dist/` 的 VPK 包含小地图布局、样式和 Panorama 脚本。若安装了同样覆盖 `hud_minimap.vxml_c` 的模组，两份布局需要合并才能同时生效。游戏更新后需核对营地组成、坐标和布局。[原生 HUD 小地图布局](https://github.com/SteamTracking/GameTracking-Deadlock/blob/e835dad025d2d4ec7ef126aa13863d1df25d726d/game/citadel/pak01_dir/panorama/layout/hud_minimap.xml) · [原生小地图样式](https://github.com/SteamTracking/GameTracking-Deadlock/blob/e835dad025d2d4ec7ef126aa13863d1df25d726d/game/citadel/pak01_dir/panorama/styles/hud_minimap.css)
+`dist/` 的 VPK 包含小地图布局、样式和 Panorama 脚本。若安装了同样覆盖 `hud_minimap.vxml_c` 的模组，两份布局需要合并才能同时生效。游戏更新后需核对营地组成、坐标和布局。[原生 HUD 小地图布局](https://github.com/SteamTracking/GameTracking-Deadlock/blob/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd/game/citadel/pak01_dir/panorama/layout/hud_minimap.xml) · [原生小地图样式](https://github.com/SteamTracking/GameTracking-Deadlock/blob/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd/game/citadel/pak01_dir/panorama/styles/hud_minimap.css)
 
-已用 Source 2 Viewer 21.1 校验两个 VPK 并读回三项资源。模拟覆盖时间变化、清空隐藏、重刷恢复、Tab 开关和悬停切换。按 360 px 布局同时摆放 51 个标签，即使全部按四位数宽度计算也无重叠。本机无 Deadlock 客户端，尚未确认 `6868` 的实际对局是否对 Panorama 暴露逐点位的活动标记，以及营地图标是否提供悬停状态。缺少所需标记或状态时，收益会保持隐藏。Tab 加载、实机缩放、阵营翻转和坐标对齐也待实机验证。
+已用 Source 2 Viewer 21.1 校验两个 VPK 并读回三项资源。模拟覆盖时间变化、清空隐藏、重刷恢复、Tab 开关和悬停切换。按 360 px 布局同时摆放 51 个标签，即使全部按四位数宽度计算也无重叠。本机无 Deadlock 客户端，尚未确认 `6871` 的实际对局是否对 Panorama 暴露逐点位的活动标记，以及营地图标是否提供悬停状态。缺少所需标记或状态时，收益会保持隐藏。Tab 加载、实机缩放、阵营翻转和坐标对齐也待实机验证。

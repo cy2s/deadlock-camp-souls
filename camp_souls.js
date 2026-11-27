@@ -4,7 +4,7 @@
     const camps = /* CAMP_DATA */ [];
     const hoverOnly = /* HOVER_ONLY */ false;
     const neutralClasses = ["neutral_weak", "neutral_medium", "neutral_large", "neutral_vault"];
-    const baseRewards = [45, 75, 199, 310];
+    const baseRewards = [43, 71, 189, 310];
     const map = $.GetContextPanel();
     let overlay;
     let sites = [];

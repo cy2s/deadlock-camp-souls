@@ -15,7 +15,7 @@ from xml.etree import ElementTree as ET
 ROOT = Path(__file__).resolve().parent
 STOCK_LAYOUT_URL = (
     "https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/"
-    "e835dad025d2d4ec7ef126aa13863d1df25d726d/game/citadel/pak01_dir/"
+    "77b862290ad3050cafd2e9c3f47e0532e9d6dcfd/game/citadel/pak01_dir/"
     "panorama/layout/hud_minimap.xml"
 )
 CAMP_COLORS = ("Small", "Medium", "Large", "Sinner")
@@ -161,7 +161,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, help="Destination VPK path")
     parser.add_argument("--hover-only", action="store_true", help="Show only the hovered camp while the Tab map is open")
-    parser.add_argument("--minimap-layout", type=Path, help="Decompiled HUD minimap XML from client build 6868")
+    parser.add_argument("--minimap-layout", type=Path, help="Decompiled HUD minimap XML from client build 6871")
     args = parser.parse_args()
     if args.minimap_layout:
         layout = args.minimap_layout.read_text(encoding="utf-8")
