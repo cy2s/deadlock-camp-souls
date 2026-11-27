@@ -1,38 +1,55 @@
-# Deadlock 营地 Souls
+# Midtown Camp Souls
 
-按住 `Tab` 打开的 Midtown 地图上，已刷新的点位显示**按当前对局时间估算的满营 Souls**。数字用游戏的 12 px 数字字体，三位数底牌宽 24 px，达到四位时加宽至 28 px。偏移较远的标签用细线指向营地。绿色、黄色、浅红色分别用于小、中、大营地，紫色用于含老虎机的营地。
+Deadlock 小地图 Mod。按住 `Tab`，查看 Midtown 野怪、老虎机和混合营地的满营 Souls 估算。对局 3:00 起，地图左上侧还有一条单个普通箱子的出魂读数，例如 20:00 会显示 `Crate drop · 58 Souls`。
 
-- **野怪营地**按配置的怪物只数累加。例如车库地面层 `2×43 + 71` 的基础值为 `157`，在 5:00 按 `2×45 + 74` 显示 `164`。
-- **老虎机及混合营地**按满营配置累加。例如单台在 8:00 约值 `337`，在 20:00 约值 `377`。
+**当前预览基于 Deadlock build 6871（11 月 26 日补丁）。** 两个安装包都已通过离线校验，游戏内显示和悬停仍待实测。[GitHub Releases](https://github.com/cy2s/deadlock-camp-souls/releases)
 
-收益取顶部原生对局计时器的整分钟数，每分钟按基础值增加 `1.08%`。野怪按单只截断后累加，老虎机按单台总额取近似整数。数字按满营估算，实际到账会受剩余数量、分配和逐次取整影响。[野怪收益计算](https://www.dltimes.com/articles/city-never-sleeps-spawn-timers) · [老虎机结算规则](https://deadlock.wiki/Sinner%27s_Sacrifice#Souls)
+## 下载与安装
 
-只有原生小地图面板提供可见、激活的营地标记，并能唯一对上点位，才显示数字。清空到重刷之间跟随游戏原生标记隐藏。读不到对局时钟或营地状态时会隐藏相应数字。
+| 版本 | 按住 Tab 时 | 下载 |
+| --- | --- | --- |
+| Tab 版 | 显示游戏已标为刷新的营地收益 | [Tab ZIP](https://github.com/cy2s/deadlock-camp-souls/releases/download/v0.1.2-preview/midtown-camp-souls-tab-6871-crate-preview.zip) |
+| 悬停试验版 | 鼠标移到原生营地图标时，显示该点位收益 | [Hover ZIP](https://github.com/cy2s/deadlock-camp-souls/releases/download/v0.1.2-preview/midtown-camp-souls-hover-6871-crate-preview.zip) |
 
-从 3:00 起，两个版本的 Tab 地图左上侧都会显示 `Crate drop`。这是单个普通箱子出魂时的金额，按 `18 + 2 × 对局整分钟` 计算，例如 3:00 为 `24 Souls`，20:00 为 `58 Souls`。普通出魂箱的配置掉落概率为 60%。 [普通箱配置](https://github.com/SteamTracking/GameTracking-Deadlock/blob/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd/game/citadel/pak01_dir/scripts/misc.vdata#L134-L154) · [掉落金额配置](https://github.com/SteamTracking/GameTracking-Deadlock/blob/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd/game/citadel/pak01_dir/scripts/misc.vdata#L1289-L1290)
+1. 退出 Deadlock，任选一个 ZIP。升级时先停用旧版。
+2. 在 Deadlock Mod Manager 打开 `Mods Library → Add Local Mod`，导入 ZIP 并启用。
+3. 启动游戏，在 Midtown 自定义对局按住 `Tab` 查看。3:00 后，两个版本都直接显示普通箱读数。 [管理器导入说明](https://docs.deadlockmods.app/using-mod-manager/library#add-local-mods)
 
-`camps.json` 的 51 个点位按地图 ID 关联 Deadlock API 的客户端 `6871` 坐标和 Deadlock Vault 的营地阵容。`counts` 依次为小怪、中怪、大怪、老虎机的数量。11 月 26 日补丁将单只野怪的基础值改为 `43 / 71 / 189`。单台老虎机的满额估算用 `155×2 = 310`，合计敲击和打碎两部分。[官方补丁说明](https://store.steampowered.com/news/app/1422450/view/680768104678032838) · [地图数据 API](https://api.deadlock-api.com/v1/assets/map?client_version=6871) · [营地阵容](https://deadlockvault.net/map/camps) · [NPC 数据](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd/game/citadel/pak01_dir/scripts/npc_units.vdata)
+**手动安装**时，将 ZIP 中的 `pak99_dir.vpk` 放入 `Deadlock/game/citadel/addons/`。若已有同名的其他模组，给本包选一个空闲的 `pakNN_dir.vpk` 文件名。首次手装时，按指南将 `Game citadel/addons` 加到 `gameinfo.gi` 的 `SearchPaths`，放在 `Game citadel` 前。卸载时在管理器停用或移除本包的 VPK。 [手动安装指南](https://wiki.divineskins.gg/en/docs/deadlock/getting-started/install-by-hand)
 
-## 安装与卸载
+## 野怪和老虎机整营收益
 
-从 [GitHub Releases](https://github.com/cy2s/deadlock-camp-souls/releases) 下载测试 ZIP，安装时任选一个包。本页下方也提供本地构建命令。
+对比 build 6868 和 6871 按对局时间计算的满营估算。曲线从营地首次刷新的时间开始，混合营地按野怪与老虎机收益相加。
 
-- **Tab 版**按住 `Tab` 时显示所有已刷新的营地和老虎机收益，松开时隐藏。
-- **悬停试验版**按住 `Tab` 后，把鼠标移到营地或老虎机的原生图标上，只显示这个点位的收益。移开鼠标或松开 `Tab` 时隐藏。
+![三个 Midtown 点位的整营收益对比。20 分钟时，车库地面层从 199 降到 190，公园图书馆维持 377，药店从 559 降到 549。](docs/camp-rewards-6868-vs-6871.png)
 
-关闭游戏，在 Deadlock Mod Manager 的 `Mods Library → Add Local Mod` 导入选中的 ZIP，然后启用。手动安装时，解压 ZIP，把其中的 `pak99_dir.vpk` 复制到 `Deadlock/game/citadel/addons/`。如果装过之前的营地收益版本，用选中的包替换。如果同名文件属于其他模组，给本包选一个空闲的 `pakNN_dir.vpk` 文件名。[管理器导入说明](https://docs.deadlockmods.app/using-mod-manager/library#add-local-mods)
+图里选了三个代表点位。交互版包含 **15 个点位**，可切换营地、查看每分钟的估算值。下载后用浏览器联网打开。 [下载交互图 HTML](https://github.com/cy2s/deadlock-camp-souls/releases/download/v0.1.2-preview/camp-rewards-6868-vs-6871.html)
 
-如果是第一次手动安装模组，在 `Deadlock/game/citadel/gameinfo.gi` 的 `SearchPaths` 区块中，在 `Game citadel` 之前添加 `Game citadel/addons`。重新启动游戏，可在自定义对局按 `Tab` 查看营地。卸载时移除本包即可。[社区安装文档](https://wiki.divineskins.gg/en/docs/deadlock/getting-started#install-mods-without-a-manager)
+## 地图读数怎么算
 
-## 构建与验证
+| 来源 | Build 6871 的估算口径 |
+| --- | --- |
+| 野怪 | 小、中、大怪单只基础值为 `43 / 71 / 189`。按对局整分钟每分钟增加基础值的 `1.08%`，单只向下取整后累加。 |
+| 老虎机 | 单台把敲击与打碎的两部分合计，基础满额为 `155 × 2 = 310`。按相同的 `1.08%` 增长，单台总额取近似整数。 |
+| 普通箱 | 单个箱子出魂时为 `18 + 2 × 对局整分钟`，3:00 为 `24`，20:00 为 `58`。此类箱子的配置掉落概率为 `60%`。 |
 
-使用 Python 3.10 或更高版本。构建时会取 `6871` 对应的原生小地图布局，也可以用 `--minimap-layout` 指定同一版本的解包 XML。
+营地数字以完整阵容估算。清空到重刷之间，数字跟随游戏的原生营地标记隐藏。实际到账会随剩余数量、分配和逐次取整变化。绿色、黄色、浅红色对应小、中、大营地，紫色代表含老虎机的点位。普通箱是地图侧边的参考值。 [官方补丁说明](https://store.steampowered.com/news/app/1422450/view/680768104678032838) · [NPC 数据](https://github.com/SteamTracking/GameTracking-Deadlock/blob/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd/game/citadel/pak01_dir/scripts/npc_units.vdata) · [老虎机结算规则](https://deadlock.wiki/Sinner%27s_Sacrifice#Souls) · [普通箱掉落](https://github.com/SteamTracking/GameTracking-Deadlock/blob/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd/game/citadel/pak01_dir/scripts/misc.vdata#L134-L154) · [普通箱金额](https://github.com/SteamTracking/GameTracking-Deadlock/blob/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd/game/citadel/pak01_dir/scripts/misc.vdata#L1289-L1290)
+
+### 地图上没看到数字
+
+- 箱子读数从 3:00 开始。对局时钟读不到时，箱子和营地数字都会隐藏。
+- 营地需要游戏提供活动标记，并能唯一对应到已收录点位。悬停版还需要原生图标提供悬停状态。
+- 其他小地图 Mod 若也覆盖 `hud_minimap.vxml_c`，请单独启用本 Mod 测试。要同时使用，需要合并布局。
+
+## 本地构建
+
+需要 Python 3.10 或更高版本。默认下载 build 6871 的原生小地图布局，已有解包文件时可以用 `--minimap-layout PATH` 指定。
 
 ```sh
-python build.py
-python build.py --hover-only
+python3 build.py               # dist/pak99_dir.vpk
+python3 build.py --hover-only  # dist/hover/pak99_dir.vpk
 ```
 
-`dist/` 的 VPK 包含小地图布局、样式和 Panorama 脚本。若安装了同样覆盖 `hud_minimap.vxml_c` 的模组，两份布局需要合并才能同时生效。游戏更新后需核对营地组成、坐标和布局。[原生 HUD 小地图布局](https://github.com/SteamTracking/GameTracking-Deadlock/blob/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd/game/citadel/pak01_dir/panorama/layout/hud_minimap.xml) · [原生小地图样式](https://github.com/SteamTracking/GameTracking-Deadlock/blob/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd/game/citadel/pak01_dir/panorama/styles/hud_minimap.css)
+`camps.json` 收录 51 个点位，按地图 ID 关联坐标和营地阵容。`counts` 依次是小怪、中怪、大怪、老虎机的数量。换版本时需核对收益配置、坐标和原生 HUD 布局。 [地图坐标](https://api.deadlock-api.com/v1/assets/map?client_version=6871) · [营地阵容](https://deadlockvault.net/map/camps) · [原生小地图布局](https://github.com/SteamTracking/GameTracking-Deadlock/blob/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd/game/citadel/pak01_dir/panorama/layout/hud_minimap.xml)
 
-已用 Source 2 Viewer 21.1 校验两个 VPK 并读回三项资源。模拟覆盖时间变化、清空隐藏、重刷恢复、Tab 开关、悬停切换和普通箱读数的首刷时间。按 360 px 布局同时摆放 51 个标签，即使全部按四位数宽度计算也无重叠。本机无 Deadlock 客户端，尚未确认 `6871` 的实际对局是否对 Panorama 暴露逐点位的活动标记，以及营地图标是否提供悬停状态。缺少所需标记或状态时，收益会保持隐藏。Tab 加载、实机缩放、阵营翻转和坐标对齐也待实机验证。
+两个 VPK 已用 Source 2 Viewer 校验并解包。脚本模拟覆盖时间增长、营地清空与重刷、Tab 开关、悬停切换和普通箱首次显示。实际游戏的标记可见性、悬停、缩放和阵营翻转仍待验证。
