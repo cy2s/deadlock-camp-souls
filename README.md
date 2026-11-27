@@ -2,7 +2,7 @@
 
 Deadlock 小地图 Mod。按住 `Tab`，查看 Midtown 野怪、老虎机和混合营地的满营 Souls 估算。对局 3:00 起，地图左上侧还有一条单个普通箱子的出魂读数，例如 20:00 会显示 `Crate drop · 58 Souls`。
 
-**当前预览基于 Deadlock build 6871（11 月 26 日补丁）。** 两个安装包都已通过离线校验，游戏内显示和悬停仍待实测。[GitHub Releases](https://github.com/cy2s/deadlock-camp-souls/releases)
+两个预览安装包均已通过离线校验，游戏内显示和悬停仍待实测。 [GitHub Releases](https://github.com/cy2s/deadlock-camp-souls/releases)
 
 ## 下载与安装
 
@@ -19,21 +19,21 @@ Deadlock 小地图 Mod。按住 `Tab`，查看 Midtown 野怪、老虎机和混�
 
 ## 野怪和老虎机整营收益
 
-对比 build 6868 和 6871 按对局时间计算的满营估算。曲线从营地首次刷新的时间开始，混合营地按野怪与老虎机收益相加。
+按当前版本（build 6873）的数据估算整营 Souls。曲线从营地首次刷新的时间开始，混合营地按野怪与老虎机收益相加。
 
-![三个 Midtown 点位的整营收益对比。20 分钟时，车库地面层从 199 降到 190，公园图书馆维持 377，药店从 559 降到 549。](docs/camp-rewards-6868-vs-6871.png)
+![三个 Midtown 点位的整营收益。20 分钟时，车库地面层 190 Souls，公园图书馆 377 Souls，药店 549 Souls。](docs/camp-rewards.png)
 
-图里选了三个代表点位。交互版包含 **15 个点位**，可切换营地、查看每分钟的估算值。下载后用浏览器联网打开。 [下载交互图 HTML](https://github.com/cy2s/deadlock-camp-souls/releases/download/v0.1.2-preview/camp-rewards-6868-vs-6871.html)
+交互版包含 **15 个点位**，可切换营地、查看每分钟的估算值。下载后用浏览器联网打开。 [下载交互图 HTML](https://github.com/cy2s/deadlock-camp-souls/releases/download/v0.1.2-preview/camp-rewards.html)
 
 ## 地图读数怎么算
 
-| 来源 | Build 6871 的估算口径 |
+| 来源 | 当前估算口径 |
 | --- | --- |
 | 野怪 | 小、中、大怪单只基础值为 `43 / 71 / 189`。按对局整分钟每分钟增加基础值的 `1.08%`，单只向下取整后累加。 |
 | 老虎机 | 单台把敲击与打碎的两部分合计，基础满额为 `155 × 2 = 310`。按相同的 `1.08%` 增长，单台总额取近似整数。 |
 | 普通箱 | 单个箱子出魂时为 `18 + 2 × 对局整分钟`，3:00 为 `24`，20:00 为 `58`。此类箱子的配置掉落概率为 `60%`。 |
 
-营地数字以完整阵容估算。清空到重刷之间，数字跟随游戏的原生营地标记隐藏。实际到账会随剩余数量、分配和逐次取整变化。绿色、黄色、浅红色对应小、中、大营地，紫色代表含老虎机的点位。普通箱是地图侧边的参考值。 [官方补丁说明](https://store.steampowered.com/news/app/1422450/view/680768104678032838) · [NPC 数据](https://github.com/SteamTracking/GameTracking-Deadlock/blob/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd/game/citadel/pak01_dir/scripts/npc_units.vdata) · [老虎机结算规则](https://deadlock.wiki/Sinner%27s_Sacrifice#Souls) · [普通箱掉落](https://github.com/SteamTracking/GameTracking-Deadlock/blob/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd/game/citadel/pak01_dir/scripts/misc.vdata#L134-L154) · [普通箱金额](https://github.com/SteamTracking/GameTracking-Deadlock/blob/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd/game/citadel/pak01_dir/scripts/misc.vdata#L1289-L1290)
+营地数字以完整阵容估算。清空到重刷之间，数字跟随游戏的原生营地标记隐藏。实际到账会随剩余数量、分配和逐次取整变化。绿色、黄色、浅红色对应小、中、大营地，紫色代表含老虎机的点位。普通箱是地图侧边的参考值。 [NPC 数据](https://github.com/SteamTracking/GameTracking-Deadlock/blob/5af9a052650ea6f47437041cbca686d88d8913d0/game/citadel/pak01_dir/scripts/npc_units.vdata) · [老虎机结算规则](https://deadlock.wiki/Sinner%27s_Sacrifice#Souls) · [普通箱掉落](https://github.com/SteamTracking/GameTracking-Deadlock/blob/5af9a052650ea6f47437041cbca686d88d8913d0/game/citadel/pak01_dir/scripts/misc.vdata#L134-L154) · [普通箱金额](https://github.com/SteamTracking/GameTracking-Deadlock/blob/5af9a052650ea6f47437041cbca686d88d8913d0/game/citadel/pak01_dir/scripts/misc.vdata#L1289-L1290)
 
 ### 地图上没看到数字
 
