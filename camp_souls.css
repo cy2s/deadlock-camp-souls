@@ -85,7 +85,10 @@
     horizontal-align: left;
     vertical-align: top;
     margin: 14px 0px 0px 8px;
+    padding: 1px 0px;
     flow-children: down;
+    border-radius: 4px;
+    background-color: #10161cf5;
     visibility: collapse;
     z-index: 10;
 }
@@ -109,13 +112,11 @@
     height: 20px;
     padding: 0px 5px;
     flow-children: right;
-    border-radius: 3px;
-    background-color: #10161cf5;
 }
 
 #CrateSoulReadout
 {
-    margin-top: 2px;
+    border-top: 1px solid #e4e9e426;
     visibility: collapse;
 }
 
@@ -138,63 +139,7 @@
 .MapSoulIcon
 {
     width: 18px;
-    height: 16px;
+    height: 18px;
     margin-right: 4px;
     vertical-align: center;
-}
-
-.TrooperHelmet
-{
-    width: 5px;
-    height: 7px;
-    margin-top: 6px;
-    border-radius: 2px;
-    background-color: #77a6b3;
-}
-
-.TrooperHelmetLeft { horizontal-align: left; }
-.TrooperHelmetRight { horizontal-align: right; }
-
-.TrooperHelmetCenter
-{
-    horizontal-align: center;
-    width: 8px;
-    height: 11px;
-    margin-top: 3px;
-    background-color: #b6e7f1;
-}
-
-.TrooperVisor
-{
-    horizontal-align: center;
-    width: 4px;
-    height: 2px;
-    margin-top: 4px;
-    background-color: #23434e;
-}
-
-.CrateFrame
-{
-    horizontal-align: center;
-    vertical-align: center;
-    width: 14px;
-    height: 12px;
-    border: 1px solid #f0cb88;
-    border-radius: 1px;
-    background-color: #5a4329;
-}
-
-.CrateBrace
-{
-    horizontal-align: center;
-    vertical-align: center;
-    width: 11px;
-    height: 1px;
-    background-color: #f0cb88;
-    transform: rotateZ(38deg);
-}
-
-.CrateBraceReverse
-{
-    transform: rotateZ(-38deg);
 }

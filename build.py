@@ -19,6 +19,7 @@ STOCK_LAYOUT_URL = (
     "panorama/layout/hud_minimap.xml"
 )
 CAMP_COLORS = ("Small", "Medium", "Large", "Sinner")
+READOUT_ICON_DIR = "panorama/images/midtown_camp_souls"
 MAP_SIZE = 360
 LABEL_WIDTH = 28  # Reserve the four-digit footprint even when the pill is narrower.
 LABEL_HEIGHT = 14
@@ -96,28 +97,20 @@ def patch_minimap(stock_layout: str, camps: list[dict], *, hover_only: bool = Fa
         "id": "MapSoulReadouts", "hittest": "false", "hittestchildren": "false",
     })
     wave = ET.SubElement(readouts, "Panel", {"class": "MapSoulReadout"})
-    wave_icon = ET.SubElement(wave, "Panel", {"class": "MapSoulIcon"})
-    ET.SubElement(wave_icon, "Panel", {"class": "TrooperHelmet TrooperHelmetLeft"})
-    ET.SubElement(wave_icon, "Panel", {"class": "TrooperHelmet TrooperHelmetRight"})
-    helmet = ET.SubElement(wave_icon, "Panel", {"class": "TrooperHelmet TrooperHelmetCenter"})
-    ET.SubElement(helmet, "Panel", {"class": "TrooperVisor"})
+    ET.SubElement(wave, "Image", {"class": "MapSoulIcon", "src": f"s2r://{READOUT_ICON_DIR}/trooper.vsvg"})
     ET.SubElement(wave, "Label", {"id": "WaveSoulValue", "class": "MapSoulReadoutValue"})
 
     crate = ET.SubElement(readouts, "Panel", {"id": "CrateSoulReadout", "class": "MapSoulReadout"})
-    crate_icon = ET.SubElement(crate, "Panel", {"class": "MapSoulIcon"})
-    crate_frame = ET.SubElement(crate_icon, "Panel", {"class": "CrateFrame"})
-    ET.SubElement(crate_frame, "Panel", {"class": "CrateBrace"})
-    ET.SubElement(crate_frame, "Panel", {"class": "CrateBrace CrateBraceReverse"})
+    ET.SubElement(crate, "Image", {"class": "MapSoulIcon", "src": f"s2r://{READOUT_ICON_DIR}/crate.vsvg"})
     ET.SubElement(crate, "Label", {"id": "CrateSoulValue", "class": "MapSoulReadoutValue"})
     ET.indent(root, space="\t")
     return ET.tostring(root, encoding="unicode") + "\n"
 
 
-def compile_panorama(text: str, *, script: bool = False) -> bytes:
-    """Encode a Panorama DATA resource. Scripts contain raw text in version 2."""
+def compile_panorama(text: str, *, version: int = 3, raw: bool = False) -> bytes:
+    """Encode a Panorama DATA resource, with a CRC prefix for layouts, styles, and icons."""
     source = text.encode("utf-8")
-    payload = source if script else struct.pack("<IH", zlib.crc32(source), 0) + source
-    version = 2 if script else 3
+    payload = source if raw else struct.pack("<IH", zlib.crc32(source), 0) + source
     header = struct.pack("<IHHII4sII", 32 + len(payload), 12, version, 8, 1, b"DATA", 12, len(payload))
     return header + bytes(4) + payload
 
@@ -167,7 +160,13 @@ def build(output: Path, stock_layout: str, *, hover_only: bool = False) -> None:
     archive = pack_vpk({
         "panorama/layout/hud_minimap.vxml_c": compile_panorama(patch_minimap(stock_layout, camps, hover_only=hover_only)),
         "panorama/styles/camp_souls.vcss_c": compile_panorama(css),
-        "panorama/scripts/camp_souls.vts_c": compile_panorama(script, script=True),
+        "panorama/scripts/camp_souls.vts_c": compile_panorama(script, version=2, raw=True),
+        f"{READOUT_ICON_DIR}/trooper.vsvg_c": compile_panorama(
+            (ROOT / "icons/trooper.svg").read_text(encoding="utf-8"), version=2,
+        ),
+        f"{READOUT_ICON_DIR}/crate.vsvg_c": compile_panorama(
+            (ROOT / "icons/crate.svg").read_text(encoding="utf-8"), version=2,
+        ),
     })
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_bytes(archive)
